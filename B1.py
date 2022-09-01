@@ -77,7 +77,7 @@ def chiba(address_list):
 
       actionChains.click(driver.find_element(By.XPATH,"//*[@id='btnAddSchDlgOK']")).perform()
       time.sleep(2)
-      FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B-1.png')
+      FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B1.png')
       driver.save_screenshot(FILENAME)
 
       driver.get("https://webgis.alandis.jp/chiba12/portal/index.html")
@@ -132,7 +132,7 @@ def chiba(address_list):
       actionChains.click(driver.find_element(By.XPATH,"//*[@id='index_hidden']")).perform()
       time.sleep(2)
       
-      FILENAME1 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B-2.png')
+      FILENAME1 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B2.png')
       driver.save_screenshot(FILENAME1)
 
       driver.quit()

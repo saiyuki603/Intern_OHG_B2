@@ -10,7 +10,7 @@ import time
 
 import os
 
-def coordinate(address):
+def saitama_doro(address_list):
     """
     addressに住所を指定すると緯度経度を返す。
 
@@ -18,6 +18,8 @@ def coordinate(address):
     ['35.712056', '139.762775']
     """
     URL = 'http://www.geocoding.jp/api/'
+
+    address = "-".join(address_list)
 
     payload = {'q': address}
     xml = requests.get(URL, params=payload)
@@ -28,7 +30,7 @@ def coordinate(address):
     longitude = soup.find('lng').string
 
     """
-    埼玉の下水を検索・スクショ
+    埼玉の道路を検索・スクショ
     """
     doro_url = 'https://www.sonicweb-asp.jp/saitama_g/map?theme=th_31#scale=1000#pos=' + longitude + ',' + latitude
     driver = webdriver.Chrome()
@@ -52,7 +54,10 @@ def coordinate(address):
     """
     縮尺変更
     """
+    time.sleep(1)
+    driver.find_element(By.XPATH, '//*[@id="side_menu_toggle_btn"]/div[1]').click()
+
     time.sleep(5)
-    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "..\images\doro.png")
+    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "image\B-4.png")
 
     driver.save_screenshot(FILENAME)

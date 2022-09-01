@@ -18,4 +18,5 @@ elif "さいたま市" in address_list[0]:
     err = B3.saitama_gesui(address_list)
     err = B4.saitama_doro(address_list)
 
+
 print(err)

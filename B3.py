@@ -28,12 +28,14 @@ def saitama_gesui(address_list):
     if soup.find('error'):
         err = 1
     latitude = soup.find('lat').string
+    latitude = latitude.replace(',', '')
     longitude = soup.find('lng').string
+    longitude = longitude.replace(',', '')
 
     soup = BeautifulSoup(xml.content, 'xml')
     found = soup.find('google_maps').string
     
-    if found[-1] != '0' or found[-1] != '1' or found[-1] != '2' or found[-1] != '3' or found[-1] != '4' or found[-1] != '5' or found[-1] != '6' or found[-1] != '7' or found[-1] != '8' or found[-1] != '9':
+    if found[-1] != '０' and found[-1] != '１' and found[-1] != '２' and found[-1] != '３' and found[-1] != '４' and found[-1] != '５' and found[-1] != '６' and found[-1] != '７' and found[-1] != '８' and found[-1] != '９':
         err = 1
 
     """
@@ -62,11 +64,15 @@ def saitama_gesui(address_list):
     縮尺変更
     """
 
+    time.sleep(5)
+    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B3.png')
+
     time.sleep(1)
 
     driver.find_element(By.XPATH, '//*[@id="side_menu_toggle_btn"]/div[1]').click()
 
     time.sleep(5)
+
     FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "image\B3.png")
 
     driver.save_screenshot(FILENAME)

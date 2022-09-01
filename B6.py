@@ -10,20 +10,24 @@ def yure(address):
     re_machi = r'区.*?\d'
     re_numbers = r'\D\d+'
 
-    ken = re.search(re_kenshi, address_han).group()
-    ku = re.search(re_ku, address_han).group()
-    ku = ku[1:]
-    machi = re.search(re_machi, address_han).group()
-    machi = machi[1:-1]
-    numbers = re.findall(re_numbers, address_han)
+    try:
+        ken = re.search(re_kenshi, address_han).group()
+        ku = re.search(re_ku, address_han).group()
+        ku = ku[1:]
+        machi = re.search(re_machi, address_han).group()
+        machi = machi[1:-1]
+        numbers = re.findall(re_numbers, address_han)
 
-    address_list = []
+        address_list = []
 
-    address_list.append(ken)
-    address_list.append(ku)
-    address_list.append(machi)
+        address_list.append(ken)
+        address_list.append(ku)
+        address_list.append(machi)
 
-    for i in numbers:
-        address_list.append(mojimoji.han_to_zen(i[1:]))
+        for i in numbers:
+            address_list.append(mojimoji.han_to_zen(i[1:]))
 
-    return(address_list)
+        return(address_list)
+    except:
+        err = 1
+        return(err)

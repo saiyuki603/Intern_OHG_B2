@@ -151,4 +151,5 @@ def chiba(address_list):
   else:
     print("千葉県千葉市ではない") 
     err = 1
+    
   return(err)

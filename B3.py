@@ -13,6 +13,7 @@ import os
 URL = 'http://www.geocoding.jp/api/'
 
 def saitama_gesui(address_list):
+    err = 0
     """
     addressに住所を指定すると緯度経度を返す。
 
@@ -26,9 +27,15 @@ def saitama_gesui(address_list):
     xml = requests.get(URL, params=payload)
     soup = BeautifulSoup(xml.content, "xml")
     if soup.find('error'):
-        raise ValueError(f"Invalid address submitted. {address}")
+        err = 1
     latitude = soup.find('lat').string
     longitude = soup.find('lng').string
+
+    soup = BeautifulSoup(xml.content, 'xml')
+    found = soup.find('google_maps').string
+    
+    if found[-1] != '0' or found[-1] != '1' or found[-1] != '2' or found[-1] != '3' or found[-1] != '4' or found[-1] != '5' or found[-1] != '6' or found[-1] != '7' or found[-1] != '8' or found[-1] != '9':
+        err = 1
 
     """
     埼玉の下水を検索・スクショ
@@ -64,3 +71,4 @@ def saitama_gesui(address_list):
     FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "image\B-3.png")
 
     driver.save_screenshot(FILENAME)
+    return(err)

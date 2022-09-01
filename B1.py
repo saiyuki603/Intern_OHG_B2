@@ -79,7 +79,11 @@ def chiba(address_list):
       time.sleep(2)
       FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B1.png')
       driver.save_screenshot(FILENAME)
-
+      # 道路だけとれる
+    except:
+      err = 2
+    
+    try:
       driver.get("https://webgis.alandis.jp/chiba12/portal/index.html")
       time.sleep(2)
 
@@ -136,9 +140,13 @@ def chiba(address_list):
       driver.save_screenshot(FILENAME1)
 
       driver.quit()
-    
+    # 下水だけとれる
     except:
-      err = 1
+      if err == 0:
+        err = 3
+      # 両方とも取れない
+      elif err == 2:
+        err = 1
 
   else:
     print("千葉県千葉市ではない") 

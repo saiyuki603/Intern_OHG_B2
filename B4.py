@@ -64,7 +64,7 @@ def saitama_doro(address_list):
     driver.find_element(By.XPATH, '//*[@id="side_menu_toggle_btn"]/div[1]').click()
 
     time.sleep(5)
-    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "image\B-4.png")
+    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "image\B4.png")
 
     driver.save_screenshot(FILENAME)
     return(err)

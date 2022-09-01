@@ -73,5 +73,3 @@ def saitama_doro(address_list):
 
     driver.save_screenshot(FILENAME)
     return(err)
-
-saitama_doro(["埼玉県さいたま市南区沼影1-20-1"])

@@ -17,6 +17,7 @@ import json
 import io
 import csv
 import os.path
+from pyexpat.errors import messages
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -26,6 +27,7 @@ from apiclient import errors
 import logging
 from docopt import docopt
 from gmail_credential import get_credential
+import re
 
 import time
 
@@ -183,4 +185,7 @@ if __name__ == "__main__":
     if messages_ == None:
         time.sleep(10)
     else:
-        print(1)
+        re_body = r'"body": ".*, "subject"'
+        address = re.search(re_body, messages_).group()
+        address = address[9:-16]
+        print(address)

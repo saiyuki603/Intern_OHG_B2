@@ -172,6 +172,7 @@ def main(query="is:unread", tag="daily_report", count=3):
 
 
 # プログラム実行部分
+
 if __name__ == "__main__":
     arguments = docopt(__doc__, version="0.1")
     query = arguments["<query>"]
@@ -185,7 +186,14 @@ if __name__ == "__main__":
     if messages_ == None:
         time.sleep(10)
     else:
-        re_body = r'"body": ".*, "subject"'
-        address = re.search(re_body, messages_).group()
+        re_body_1 = r'"body": ".*, "subject"'
+        address = re.search(re_body_1, messages_).group()
         address = address[9:-16]
-        print(address)
+        # print(address)
+        re_body_2 = r'<.*@.*>'
+        from_mail = re.search(re_body_2, messages_).group()
+        from_mail = from_mail[1:-1]
+        # print(mail)
+
+print(address)
+print(from_mail)

@@ -53,6 +53,7 @@ def coordinate(address):
     縮尺変更
     """
     time.sleep(5)
-    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "..\images\doro.png")
+
+    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B4.png')
 
     driver.save_screenshot(FILENAME)

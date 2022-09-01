@@ -22,6 +22,7 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.audio import MIMEAudio
+from email.mime.application import MIMEApplication
 from pathlib import Path
 
 from email.mime.multipart import MIMEMultipart
@@ -80,6 +81,9 @@ def create_message_with_attachment(
     elif main_type == "audio":
         with open(file_path, "rb") as fp:
             msg = MIMEAudio(fp.read(), _subtype=sub_type)
+    elif main_type == "application":
+        with open(file_path, "rb") as fp:
+            msg = MIMEApplication(fp.read(), _subtype = sub_type)
     else:
         with open(file_path, "rb") as fp:
             msg = MIMEBase(main_type, sub_type)

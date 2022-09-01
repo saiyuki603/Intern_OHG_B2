@@ -12,20 +12,29 @@ import os
 
 URL = 'http://www.geocoding.jp/api/'
 
-def coordinate(address):
+def saitama_gesui(address_list):
+    err = 0
     """
     addressに住所を指定すると緯度経度を返す。
-
     >>> coordinate('東京都文京区本郷7-3-1')
     ['35.712056', '139.762775']
     """
+
+    address = "-".join(address_list)
+
     payload = {'q': address}
     xml = requests.get(URL, params=payload)
     soup = BeautifulSoup(xml.content, "xml")
     if soup.find('error'):
-        raise ValueError(f"Invalid address submitted. {address}")
+        err = 1
     latitude = soup.find('lat').string
     longitude = soup.find('lng').string
+
+    soup = BeautifulSoup(xml.content, 'xml')
+    found = soup.find('google_maps').string
+    
+    if found[-1] != '0' or found[-1] != '1' or found[-1] != '2' or found[-1] != '3' or found[-1] != '4' or found[-1] != '5' or found[-1] != '6' or found[-1] != '7' or found[-1] != '8' or found[-1] != '9':
+        err = 1
 
     """
     埼玉の下水を検索・スクショ
@@ -48,11 +57,17 @@ def coordinate(address):
     同意画面クリック
     """
     time.sleep(5)
-    driver.find_element(By.XPATH, '//*[@id="footer"]/div[1]/a[21]').click()
+    driver.find_element(By.XPATH, '//*[@id="footer"]/div[1]/a[18]').click()
     """
     縮尺変更
     """
+
+    time.sleep(1)
+
+    driver.find_element(By.XPATH, '//*[@id="side_menu_toggle_btn"]/div[1]').click()
+
     time.sleep(5)
-    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B-3.png')
+    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "image\B3.png")
 
     driver.save_screenshot(FILENAME)
+    return(err)

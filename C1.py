@@ -1,5 +1,6 @@
 from ctypes import addressof
 import importlib
+import traceback
 import slackweb
 from PIL import Image
 import base64
@@ -45,6 +46,7 @@ def mail(address,err):
         attach_file_path = file_path
         sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
         sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
+
         slack.notify(text="エラーが発生：一部のデータを取得できず")
     elif err == 3:
         # 千葉下水だけとれる

@@ -44,34 +44,36 @@ def saitama_gesui(address_list):
     gesui_url = 'https://www.sonicweb-asp.jp/saitama_g/map?theme=th_90#scale=500&pos=' + longitude + ',' + latitude
     driver = webdriver.Chrome()
 
+    driver.implicitly_wait(10)
+
     driver.get(gesui_url)
-    time.sleep(5)
+    #time.sleep(5)
 
     iframe = driver.find_element(By.XPATH, '//*[@id="agreement_mask"]')
     driver.switch_to.frame(iframe)
     """
     iframe に移動
     """
-    time.sleep(5)
+    #time.sleep(5)
     driver.find_element(By.XPATH, '//*[@id="agree_btn_area"]/ul/li[1]/a').click()
     driver.switch_to.default_content()
     """
     同意画面クリック
     """
-    time.sleep(5)
+    #time.sleep(5)
     driver.find_element(By.XPATH, '//*[@id="footer"]/div[1]/a[18]').click()
     """
     縮尺変更
     """
 
-    time.sleep(5)
+    #time.sleep(5)
     FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B3.png')
 
-    time.sleep(1)
+    #time.sleep(1)
 
     driver.find_element(By.XPATH, '//*[@id="side_menu_toggle_btn"]/div[1]').click()
 
-    time.sleep(5)
+    time.sleep(3)
 
     FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "image\B3.png")
 

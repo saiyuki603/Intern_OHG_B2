@@ -43,26 +43,27 @@ def saitama_doro(address_list):
     doro_url = 'https://www.sonicweb-asp.jp/saitama_g/map?theme=th_31#scale=5000&pos=' + longitude + ',' + latitude
     driver = webdriver.Chrome()
 
+    driver.implicitly_wait(10)
+
     driver.get(doro_url)
-    time.sleep(5)
 
     iframe = driver.find_element(By.XPATH, '//*[@id="agreement_mask"]')
     driver.switch_to.frame(iframe)
     """
     iframe に移動
     """
-    time.sleep(5)
     driver.find_element(By.XPATH, '//*[@id="agree_btn_area"]/ul/li[1]/a').click()
     driver.switch_to.default_content()
     """
     同意画面クリック
     """
-    time.sleep(5)
     driver.find_element(By.XPATH, '//*[@id="footer"]/div[1]/a[18]').click()
     """
     縮尺変更
     """
-    time.sleep(5)
+
+    driver.find_element(By.XPATH, '//*[@id="side_menu_toggle_btn"]/div[1]').click()
+    time.sleep(3)
 
     FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B4.png')
     driver.save_screenshot(FILENAME)

@@ -9,15 +9,17 @@ import os
 import PyPDF2
 import sendmail
 
+
+
 def mail(address,err):
     sender = "intern.ohg.24b@gmail.com"
     to ="lidanyang633@gmail.com"
     merger = PyPDF2.PdfFileMerger()
-    slack = slackweb.Slack(url = "https://hooks.slack.com/services/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")
+    # slack = slackweb.Slack(url = "https://hooks.slack.com/services/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")
 
     # 両方とも取れない
     if err == 1:
-        msg = open('err1.txt', 'r', encoding='UTF-8')
+        msg = open('err1.html', 'r', encoding='UTF-8')
         message_text = msg.read()
         msg.close()
 
@@ -26,7 +28,7 @@ def mail(address,err):
         sendmail.create_message(sender, to, subject, message_text, cc=None) 
         attach_file_path = None
         sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
-        slack.notify(text="エラーが発生：入力不正又は範囲外")
+        # slack.notify(text="エラーが発生：入力不正又は範囲外")
         
         
 
@@ -47,7 +49,7 @@ def mail(address,err):
         sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
         sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
 
-        slack.notify(text="エラーが発生：一部のデータを取得できず")
+        # slack.notify(text="エラーが発生：一部のデータを取得できず")
     elif err == 3:
         # 千葉下水だけとれる
         Chiba_Gesui = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B1.png'))
@@ -64,7 +66,7 @@ def mail(address,err):
         attach_file_path = file_path
         sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
         sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
-        slack.notify(text="エラーが発生：一部のデータを取得できず")
+        # slack.notify(text="エラーが発生：一部のデータを取得できず")
 
         
 
@@ -129,5 +131,5 @@ def mail(address,err):
 
 address=["千葉市","稲毛区","稲毛","３","７"]
 
-err = 2
+err = 1
 mail(address, err)

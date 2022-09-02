@@ -40,7 +40,7 @@ def create_message(sender, to, subject, message_text, cc=None):
     MIMEText を base64 エンコードする
     """
     enc = "utf-8"
-    message = MIMEText(message_text.encode(enc), _charset=enc)
+    message = MIMEText(message_text.encode(enc), _charset=enc, _subtype='html')
     message["to"] = to
     message["from"] = sender
     message["subject"] = subject

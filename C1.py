@@ -9,7 +9,7 @@ import sendmail
 
 def mail(address,err):
     sender = "intern.ohg.24b@gmail.com"
-    to ="lidanyang633@gmail.com"
+    to ="kazuki.tanaka@openhouse-group.com"
     merger = PyPDF2.PdfFileMerger()
 
     # 両方とも取れない
@@ -121,5 +121,5 @@ def mail(address,err):
 
 address=["千葉市","稲毛区","稲毛","３","７"]
 
-err = 2
+err = 1
 mail(address, err)

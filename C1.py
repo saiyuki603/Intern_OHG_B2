@@ -10,7 +10,6 @@ def mail(address,err):
     sender = "intern.ohg.24b@gmail.com"
     to ="lidanyang633@gmail.com"
     merger = PyPDF2.PdfFileMerger()
-    err =1
 
     # 両方とも取れない
     if err == 1:

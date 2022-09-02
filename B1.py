@@ -80,5 +80,3 @@ def chiba_gesui(address_list):
     
 
   return(err, a)
-
-# chiba(['千葉県千葉市','稲毛区','稲毛','３','７','３０'])

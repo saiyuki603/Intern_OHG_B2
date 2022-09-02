@@ -1,3 +1,4 @@
+from ctypes import addressof
 import importlib
 from PIL import Image
 import base64
@@ -13,7 +14,10 @@ def mail(address,err):
 
     # 両方とも取れない
     if err == 1:
-        message_text = "err1.txt"
+        msg = open('err1.txt', 'r', encoding='UTF-8')
+        message_text = msg.read()
+        msg.close()
+
         subject = "エラーが発生：入力不正又は範囲外"
         sendmail.create_message(sender, to, subject, message_text, cc=None) 
         attach_file_path = None
@@ -29,7 +33,9 @@ def mail(address,err):
         CG2.save(pdfPath2)
         merger.append(pdfPath2)
 
-        message_text = "err2.txt"
+        msg = open('err2.txt', 'r', encoding='UTF-8')
+        message_text = msg.read()
+        msg.close()
         subject = "エラーが発生：一部のデータを取得できず"
         file_path = pdfPath2
         attach_file_path = file_path
@@ -43,7 +49,9 @@ def mail(address,err):
         CG1.save(pdfPath1)
         merger.append(pdfPath1)
 
-        message_text = "err3.txt"
+        msg = open('err3.txt', 'r', encoding='UTF-8')
+        message_text = msg.read()
+        msg.close()
         subject = "エラーが発生：一部のデータを取得できず"
         file_path = pdfPath1
         attach_file_path = file_path
@@ -72,7 +80,9 @@ def mail(address,err):
 
             merger.write(pdfPath5)
 
-            message_text = "ok.txt"
+            msg = open('ok.txt', 'r', encoding='UTF-8')
+            message_text = msg.read()
+            msg.close()
             subject = "データ取得成功"
             file_path = pdfPath5
             attach_file_path =file_path
@@ -96,7 +106,10 @@ def mail(address,err):
             pdfPath6 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/info.pdf')
             merger.write(pdfPath6)
 
-            message_text = "ok.txt"
+
+            msg = open('ok.txt', 'r', encoding='UTF-8')
+            message_text = msg.read()
+            msg.close()
             subject = "データ取得成功"
             file_path = pdfPath6
             attach_file_path= file_path
@@ -104,3 +117,9 @@ def mail(address,err):
             sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
 
     merger.close()
+
+
+address=["千葉市","稲毛区","稲毛","３","７"]
+
+err = 2
+mail(address, err)

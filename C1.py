@@ -1,11 +1,22 @@
+import imp
 from PIL import Image
+import base64
+from email.mime.multipart import MIMEMultipart
 import os
 import PyPDF2
+import sendmail
 
-def mail(address,err,meado):
+def mail(address,err):
+    sender = "intern.ohg.24b@gmail.com"
+    to ="lidanyang633@gmail.com"
     merger = PyPDF2.PdfFileMerger()
+    err =1
     if err == 1:
-        return("入力エラー")
+        sendmail.create_message(sender, to, subject, message_text, cc=None) 
+        message_text = "err1.txt"
+        subject = "入力エラー"
+        
+
     elif err == 2:
         # PDF変換
         Chiba_Doro = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B2.png'))

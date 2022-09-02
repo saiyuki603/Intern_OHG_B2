@@ -175,7 +175,7 @@ def main(query="is:unread", tag="daily_report", count=3):
 
 if __name__ == "__main__":
     # arguments = docopt(__doc__, version="0.1")
-    query = "is:unread"  # arguments["<query>"]
+    query = "is:read"  # arguments["<query>"]
     tag = "map"  # arguments["<tag>"]
     count = 1  # arguments["<count>"]
     logging.basicConfig(level=logging.DEBUG)
@@ -194,3 +194,5 @@ if __name__ == "__main__":
         from_mail = re.search(re_body_2, messages_).group()
         from_mail = from_mail[1:-1]
         print(from_mail)
+
+print("worked")

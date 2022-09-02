@@ -143,5 +143,3 @@ def chiba(address_list):
     err = 1
     
   return(err)
-
-chiba(['千葉県千葉市', '稲毛区', '稲毛', '３', '７'])

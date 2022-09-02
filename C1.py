@@ -1,4 +1,4 @@
-import imp
+import importlib
 from PIL import Image
 import base64
 from email.mime.multipart import MIMEMultipart
@@ -17,6 +17,8 @@ def mail(address,err):
         message_text = "err1.txt"
         subject = "エラーが発生：入力不正又は範囲外"
         sendmail.create_message(sender, to, subject, message_text, cc=None) 
+        attach_file_path = None
+        sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
         
         
 
@@ -31,7 +33,9 @@ def mail(address,err):
         message_text = "err2.txt"
         subject = "エラーが発生：一部のデータを取得できず"
         file_path = pdfPath2
+        attach_file_path = file_path
         sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
+        sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
     elif err == 3:
         # 千葉下水だけとれる
         Chiba_Gesui = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B1.png'))
@@ -43,7 +47,9 @@ def mail(address,err):
         message_text = "err3.txt"
         subject = "エラーが発生：一部のデータを取得できず"
         file_path = pdfPath1
+        attach_file_path = file_path
         sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
+        sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
 
         
 
@@ -70,7 +76,9 @@ def mail(address,err):
             message_text = "ok.txt"
             subject = "データ取得成功"
             file_path = pdfPath5
+            attach_file_path =file_path
             sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
+            sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
 
         elif "さいたま市" in address[0]:
             Saitama_Gesui = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B3.png'))
@@ -92,6 +100,8 @@ def mail(address,err):
             message_text = "ok.txt"
             subject = "データ取得成功"
             file_path = pdfPath6
+            attach_file_path= file_path
             sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
+            sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
 
     merger.close()

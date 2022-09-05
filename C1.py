@@ -40,7 +40,7 @@ def mail(address,err):
         CG2.save(pdfPath2)
         merger.append(pdfPath2)
 
-        msg = open('err2.txt', 'r', encoding='UTF-8')
+        msg = open('err2.html', 'r', encoding='UTF-8')
         message_text = msg.read()
         msg.close()
         subject = "エラーが発生：一部のデータを取得できず"
@@ -58,7 +58,7 @@ def mail(address,err):
         CG1.save(pdfPath1)
         merger.append(pdfPath1)
 
-        msg = open('err3.txt', 'r', encoding='UTF-8')
+        msg = open('err3.html', 'r', encoding='UTF-8')
         message_text = msg.read()
         msg.close()
         subject = "エラーが発生：一部のデータを取得できず"
@@ -90,7 +90,7 @@ def mail(address,err):
 
             merger.write(pdfPath5)
 
-            msg = open('ok.txt', 'r', encoding='UTF-8')
+            msg = open('ok.html', 'r', encoding='UTF-8')
             message_text = msg.read()
             msg.close()
             subject = "データ取得成功"
@@ -117,7 +117,7 @@ def mail(address,err):
             merger.write(pdfPath6)
 
 
-            msg = open('ok.txt', 'r', encoding='UTF-8')
+            msg = open('ok.html', 'r', encoding='UTF-8')
             message_text = msg.read()
             msg.close()
             subject = "データ取得成功"

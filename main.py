@@ -4,6 +4,7 @@ import B3
 import B4
 import B6
 import trigger
+import C1
 
 import time
 import pickle
@@ -17,9 +18,13 @@ from multiprocessing import Process
 
 logger = logging.getLogger(__name__)
 
+address_ = ''
+from_mail_ = ''
+address_list_ = []
+
 if __name__ == "__main__":
     # arguments = docopt(__doc__, version="0.1")
-    query = "is:read"  # arguments["<query>"]
+    query = "is:unread"  # arguments["<query>"]
     tag = "map"  # arguments["<tag>"]
     count = 1  # arguments["<count>"]
     logging.basicConfig(level=logging.INFO)
@@ -28,15 +33,18 @@ if __name__ == "__main__":
     print(messages_)
 
     if messages_ == None:
+        print('messages_None')
         time.sleep(5)
     else:
         re_body_1 = r'"body": ".*, "subject"'
         address = re.search(re_body_1, messages_).group()
         address = address[9:-16]
         print(address)
+        address_ = address
         re_body_2 = r'<.*@.*>'
         from_mail = re.search(re_body_2, messages_).group()
         from_mail = from_mail[1:-1]
+        from_mail_ = from_mail
         print(from_mail)
 
 err = 0
@@ -47,13 +55,22 @@ err = 2 : 千葉道路の画像なし
 err = 3 : 千葉下水の画像なし
 """
 
+address = address_
 address_list = B6.yure(address)
-if address_list == 1:
-    err = 1
-elif "千葉市" in address_list[0]:
+address_list_ = address_list
+
+address_list = address_list_
+from_mail = from_mail_
+
+# address_list = ['埼玉県さいたま市', '大宮区', '大門町', '２', '１', '１']
+# from_mail = 'intern.summer.24b@gmail.com'
+
+if "千葉市" in address_list[0]:
     err, a = B1.chiba_gesui(address_list)
     err = B2.chiba_doro(address_list, a, err)
 elif "さいたま市" in address_list[0]:
+    # err = B3.saitama_gesui(address_list)
+    # err = B4.saitama_doro(address_list)
     if __name__ == '__main__':
         process_list = []
 
@@ -67,3 +84,7 @@ elif "さいたま市" in address_list[0]:
 
         for process in process_list:
             process.join()
+else:
+    err = 1
+
+C1.mail(address_list, err, from_mail)

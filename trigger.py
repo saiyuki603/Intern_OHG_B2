@@ -102,6 +102,7 @@ def list_message(service, user_id, query, label_ids=[], count=1):
             else:
                 parts = message_detail['payload']['parts']
                 parts = [part for part in parts if part['mimeType'] == 'text/plain']
+
                 message["body"] = decode_base64url_data(
                     parts[0]['body']['data']
                     )
@@ -169,25 +170,25 @@ def main(query="is:unread", tag="daily_report", count=3):
 
 # プログラム実行部分
 
-if __name__ == "__main__":
-    # arguments = docopt(__doc__, version="0.1")
+# if __name__ == "__main__":
+#     # arguments = docopt(__doc__, version="0.1")
 
-    query = "is:unread"  # arguments["<query>"]
-    tag = "map"  # arguments["<tag>"]
-    count = 1  # arguments["<count>"]
-    logging.basicConfig(level=logging.DEBUG)
+#     query = "is:unread"  # arguments["<query>"]
+#     tag = "map"  # arguments["<tag>"]
+#     count = 1  # arguments["<count>"]
+#     logging.basicConfig(level=logging.DEBUG)
 
-    messages_ = main(query=query, tag=tag, count=count)
-    print(messages_)
+#     messages_ = main(query=query, tag=tag, count=count)
+#     print(messages_)
 
-    if messages_ == None:
-        time.sleep(5)
-    else:
-        re_body_1 = r'"body": ".*, "subject"'
-        address = re.search(re_body_1, messages_).group()
-        address = address[9:-16]
-        print(address)
-        re_body_2 = r'<.*@.*>'
-        from_mail = re.search(re_body_2, messages_).group()
-        from_mail = from_mail[1:-1]
-        print(from_mail)
+#     if messages_ == None:
+#         time.sleep(5)
+#     else:
+#         re_body_1 = r'"body": ".*, "subject"'
+#         address = re.search(re_body_1, messages_).group()
+#         address = address[9:-16]
+#         print(address)
+#         re_body_2 = r'<.*@.*>'
+#         from_mail = re.search(re_body_2, messages_).group()
+#         from_mail = from_mail[1:-1]
+#         print(from_mail)

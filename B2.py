@@ -31,13 +31,16 @@ def chiba_doro(address_list, a, err):
         
         actionChains = ActionChains(driver)
         
+        # 処理時に最大10秒間待つ
         driver.implicitly_wait(10)
         driver.get("https://webgis.alandis.jp/chiba12/portal/index.html")
-
+        
+        # ページの下へスクロール
         driver.execute_script("window.scrollBy(0, document.body.scrollHeight);")
         actionChains.click(driver.find_element(By.XPATH,"//*[@id='agree']")).perform()
-
         driver.execute_script("window.scrollBy(0, document.body.scrollHeight);")
+
+        # 地図の中のエリアを探してクリックする
         driver.find_element(By.XPATH,"/html/body/main/div[2]/div[2]/div/div/map/area[265]").click()
         time.sleep(3.5)
         actionChains.click(driver.find_element(By.XPATH,"//*[@id='sidemenu_tab_search']")).perform()
@@ -45,6 +48,7 @@ def chiba_doro(address_list, a, err):
 
         actionChains.click(driver.find_element(By.XPATH,"//*[@id='sidemenu_menu_search_drilldown_1']/span")).perform()
 
+        # ドロップダウンから入力内容を検索して、選択する
         d5 = driver.find_element(By.XPATH,"//*[@id='srh_search_drilldown_1_attrvalue_1']")
         select = Select(d5)
         select.select_by_visible_text(s1)
@@ -57,6 +61,7 @@ def chiba_doro(address_list, a, err):
 
             d7 = driver.find_element(By.XPATH,"//*[@id='srh_search_drilldown_1_attrvalue_3']")
             select = Select(d7)
+            # 全角から半角へ
             s3 = mojimoji.zen_to_han(s3)
             select.select_by_visible_text(s3)
         
@@ -68,17 +73,18 @@ def chiba_doro(address_list, a, err):
 
             d7 = driver.find_element(By.XPATH,"//*[@id='srh_search_drilldown_1_attrvalue_3']")
             select = Select(d7)
+            # 全角から半角へ
             s4 = mojimoji.zen_to_han(s4)
 
             select.select_by_visible_text(s4)
-
             actionChains.click(driver.find_element(By.XPATH,"//*[@id='srh_search_drilldown_1_btn']")).perform()
 
+            # 余計なものを閉じる
             actionChains.click(driver.find_element(By.XPATH,"//*[@id='sidemenu_tab_search']")).perform()
-
             actionChains.click(driver.find_element(By.XPATH,"//*[@id='index_hidden']")).perform()
             time.sleep(3)
-
+            
+        # 相対パスにスクショをセーブする
         FILENAME1 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B2.png')
         driver.save_screenshot(FILENAME1)
 

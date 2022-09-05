@@ -36,8 +36,14 @@ if __name__ == "__main__":
             re_body_1 = r'"body": ".*, "subject"'
             address = re.search(re_body_1, messages_).group()
             address = address[9:-16]
+
+            re_subject = r'"subject": ".*",'
+            subject = re.search(re_subject, messages_).group()
+            subject = subject[12:-2]
+            if 'map' not in subject:
+                continue
+
             # print(address)
-            address_ = address
             re_body_2 = r'<.*@.*>'
             from_mail = re.search(re_body_2, messages_).group()
             from_mail = from_mail[1:-1]

@@ -64,7 +64,7 @@ def create_message_with_attachment(
         message["Cc"] = cc
     # attach message text
     enc = "utf-8"
-    msg = MIMEText(message_text.encode(enc), _charset=enc)
+    msg = MIMEText(message_text.encode(enc), _charset=enc, _subtype='html')
     message.attach(msg)
 
     content_type, encoding = mimetypes.guess_type(file_path)

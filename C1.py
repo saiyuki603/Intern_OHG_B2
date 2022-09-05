@@ -131,5 +131,5 @@ def mail(address,err):
 
 address=["千葉市","稲毛区","稲毛","３","７"]
 
-err = 1
+err = 3
 mail(address, err)

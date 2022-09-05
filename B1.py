@@ -26,20 +26,22 @@ def chiba_gesui(address_list):
       s4 = list[4]
       driver = webdriver.Chrome()
 
+      # 処理時に最大10秒間待つ
       driver.implicitly_wait(10)
 
       driver.get("http://s-page.tumsy.com/chibagesui/index.html")
 
-      # 同意する
       iframe = driver.find_element(By.XPATH,"/html/frameset/frame")
       driver.switch_to.frame(iframe)
 
+      # ページの下へスクロール
       driver.execute_script("window.scrollBy(0, document.body.scrollHeight);")
 
       actionChains = ActionChains(driver)
-      
+      # 同意する
       actionChains.click(driver.find_element(By.XPATH,"//*[@id='LinkButton1']")).perform()
       
+      # ドロップダウンから入力内容を検索して、選択する
       d1 = driver.find_element(By.XPATH,"//*[@id='ELM_CMB_LEV1']")
       select = Select(d1)
       select.select_by_visible_text(s1)
@@ -53,12 +55,15 @@ def chiba_gesui(address_list):
       select = Select(d3)
       selected = select.all_selected_options
 
+      # 丁目なし
       if selected[0].text =="丁目なし":
         d4 = driver.find_element(By.XPATH,"//*[@id='ELM_CMB_LEV4']")
         select = Select(d4)
         s4 = s3 + "番地"
         select.select_by_visible_text(s4)
         a = 0
+
+      # 丁目あり
       else:
         d3 = driver.find_element(By.XPATH,"//*[@id='ELM_CMB_LEV3']")
         select = Select(d3)
@@ -72,9 +77,11 @@ def chiba_gesui(address_list):
 
       actionChains.click(driver.find_element(By.XPATH,"//*[@id='btnAddSchDlgOK']")).perform()
       time.sleep(3)
+      # 相対パスにスクショをセーブ
       FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B1.png')
       driver.save_screenshot(FILENAME)
-      # 道路だけとれる
+
+    # 道路だけとれる
     except:
       err = 2
     

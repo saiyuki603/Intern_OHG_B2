@@ -133,3 +133,5 @@ address=["千葉市","稲毛区","稲毛","３","７"]
 
 err = 3
 mail(address, err)
+# mailに住所を書く
+# 色変更

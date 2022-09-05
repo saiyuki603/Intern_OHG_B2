@@ -1,12 +1,10 @@
 
 """
 list GMail Inbox.
-
 Usage:
   listmail.py <query> <tag> <count>
   listmail.py -h | --help
   listmail.py --version
-
 Options:
   -h --help     Show this screen.
   --version     Show version.
@@ -55,7 +53,6 @@ def decode_base64url_data(data):
 def list_message(service, user_id, query, label_ids=[], count=1):
     """
     メールのリストを取得する
-
     Parameters
     ----------
     service : googleapiclient.discovery.Resource
@@ -68,7 +65,6 @@ def list_message(service, user_id, query, label_ids=[], count=1):
         検索対象のラベルを示すIDのリスト
     count : str
         リターンするメール情報件数の上限
-
     Returns
     ----------
     messages : list
@@ -175,7 +171,8 @@ def main(query="is:unread", tag="daily_report", count=3):
 
 if __name__ == "__main__":
     # arguments = docopt(__doc__, version="0.1")
-    query = "is:read"  # arguments["<query>"]
+
+    query = "is:unread"  # arguments["<query>"]
     tag = "map"  # arguments["<tag>"]
     count = 1  # arguments["<count>"]
     logging.basicConfig(level=logging.DEBUG)

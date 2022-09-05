@@ -1,7 +1,7 @@
 from ctypes import addressof
 import importlib
 import traceback
-import slackweb
+# import slackweb
 from PIL import Image
 import base64
 from email.mime.multipart import MIMEMultipart
@@ -12,13 +12,13 @@ import sendmail
 
 
 def mail(address,err):
-<<<<<<< HEAD
+
     sender = "intern.summer.24b@gmail.com"
-    to ="intern.ohg@gmail.com"
-=======
-    sender = "intern.ohg.24b@gmail.com"
-    to ="lidanyang633@gmail.com"
->>>>>>> 26e5b24eea3233d43a5667405fd85778109f5cf5
+    to ="intern.ohg.24b@gmail.com"
+
+    # sender = "intern.ohg.24b@gmail.com"
+    # to ="lidanyang633@gmail.com"
+
     merger = PyPDF2.PdfFileMerger()
     # slack = slackweb.Slack(url = "https://hooks.slack.com/services/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")
 

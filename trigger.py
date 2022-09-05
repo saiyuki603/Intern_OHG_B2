@@ -1,12 +1,10 @@
 
 """
 list GMail Inbox.
-
 Usage:
   listmail.py <query> <tag> <count>
   listmail.py -h | --help
   listmail.py --version
-
 Options:
   -h --help     Show this screen.
   --version     Show version.
@@ -55,7 +53,6 @@ def decode_base64url_data(data):
 def list_message(service, user_id, query, label_ids=[], count=1):
     """
     メールのリストを取得する
-
     Parameters
     ----------
     service : googleapiclient.discovery.Resource
@@ -68,7 +65,6 @@ def list_message(service, user_id, query, label_ids=[], count=1):
         検索対象のラベルを示すIDのリスト
     count : str
         リターンするメール情報件数の上限
-
     Returns
     ----------
     messages : list
@@ -186,6 +182,7 @@ if __name__ == "__main__":
     if messages_ == None:
         time.sleep(5)
     else:
+
         re_body_1 = r'"body": ".*, "subject"'
         address = re.search(re_body_1, messages_).group()
         address = address[9:-16]
@@ -193,4 +190,8 @@ if __name__ == "__main__":
         re_body_2 = r'<.*@.*>'
         from_mail = re.search(re_body_2, messages_).group()
         from_mail = from_mail[1:-1]
+<<<<<<< HEAD
         print(from_mail)
+=======
+        # print(from_mail)
+>>>>>>> dev_ri

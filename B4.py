@@ -10,25 +10,33 @@ import time
 
 import os
 
-def coordinate(address):
+def saitama_doro(address_list):
+    err = 0
     """
     addressに住所を指定すると緯度経度を返す。
-
     >>> coordinate('東京都文京区本郷7-3-1')
     ['35.712056', '139.762775']
     """
     URL = 'http://www.geocoding.jp/api/'
 
+    address = "-".join(address_list)
+
     payload = {'q': address}
     xml = requests.get(URL, params=payload)
     soup = BeautifulSoup(xml.content, "xml")
     if soup.find('error'):
-        raise ValueError(f"Invalid address submitted. {address}")
+        err = 1
     latitude = soup.find('lat').string
     longitude = soup.find('lng').string
 
+    soup = BeautifulSoup(xml.content, 'xml')
+    found = soup.find('google_maps').string
+    
+    if found[-1] != '0' or found[-1] != '1' or found[-1] != '2' or found[-1] != '3' or found[-1] != '4' or found[-1] != '5' or found[-1] != '6' or found[-1] != '7' or found[-1] != '8' or found[-1] != '9':
+        err = 1
+
     """
-    埼玉の下水を検索・スクショ
+    埼玉の道路を検索・スクショ
     """
     doro_url = 'https://www.sonicweb-asp.jp/saitama_g/map?theme=th_31#scale=1000#pos=' + longitude + ',' + latitude
     driver = webdriver.Chrome()
@@ -52,7 +60,11 @@ def coordinate(address):
     """
     縮尺変更
     """
+    time.sleep(1)
+    driver.find_element(By.XPATH, '//*[@id="side_menu_toggle_btn"]/div[1]').click()
+
     time.sleep(5)
-    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "..\images\doro.png")
+    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "image\B4.png")
 
     driver.save_screenshot(FILENAME)
+    return(err)

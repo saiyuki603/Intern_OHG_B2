@@ -22,6 +22,7 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.audio import MIMEAudio
+from email.mime.application import MIMEApplication
 from pathlib import Path
 
 from email.mime.multipart import MIMEMultipart
@@ -39,7 +40,7 @@ def create_message(sender, to, subject, message_text, cc=None):
     MIMEText を base64 エンコードする
     """
     enc = "utf-8"
-    message = MIMEText(message_text.encode(enc), _charset=enc)
+    message = MIMEText(message_text.encode(enc), _charset=enc, _subtype='html')
     message["to"] = to
     message["from"] = sender
     message["subject"] = subject
@@ -63,7 +64,7 @@ def create_message_with_attachment(
         message["Cc"] = cc
     # attach message text
     enc = "utf-8"
-    msg = MIMEText(message_text.encode(enc), _charset=enc)
+    msg = MIMEText(message_text.encode(enc), _charset=enc, _subtype='html')
     message.attach(msg)
 
     content_type, encoding = mimetypes.guess_type(file_path)
@@ -80,6 +81,9 @@ def create_message_with_attachment(
     elif main_type == "audio":
         with open(file_path, "rb") as fp:
             msg = MIMEAudio(fp.read(), _subtype=sub_type)
+    elif main_type == "application":
+        with open(file_path, "rb") as fp:
+            msg = MIMEApplication(fp.read(), _subtype = sub_type)
     else:
         with open(file_path, "rb") as fp:
             msg = MIMEBase(main_type, sub_type)

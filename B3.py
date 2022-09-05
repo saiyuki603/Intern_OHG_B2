@@ -13,6 +13,8 @@ import os
 URL = 'http://www.geocoding.jp/api/'
 
 def saitama_gesui(address_list):
+    print('B3 start')
+
     err = 0
     """
     addressに住所を指定すると緯度経度を返す。
@@ -67,7 +69,7 @@ def saitama_gesui(address_list):
     """
 
     #time.sleep(5)
-    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B3.png')
+    FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image\B3.png')
 
     #time.sleep(1)
 
@@ -79,3 +81,7 @@ def saitama_gesui(address_list):
 
     driver.save_screenshot(FILENAME)
     return(err)
+
+    print('B3ended')
+
+# saitama_gesui(['埼玉県さいたま市', '大宮区', '大門町', '２', '１', '１'])

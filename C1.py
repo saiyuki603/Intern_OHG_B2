@@ -11,9 +11,8 @@ import sendmail
 
 
 
-def mail(address,err):
-    sender = "intern.ohg.24b@gmail.com"
-    to ="lidanyang633@gmail.com"
+def mail(address, err, to):
+    sender = "intern.summer.24b@gmail.com"
     merger = PyPDF2.PdfFileMerger()
     # slack = slackweb.Slack(url = "https://hooks.slack.com/services/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")
 
@@ -73,6 +72,7 @@ def mail(address,err):
     # 両方とも取れる
     elif err == 0:
         if "千葉市" in address[0]:
+
             Chiba_Gesui = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B1.png'))
             CG1 = Chiba_Gesui.convert("RGB")
             pdfPath1 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/CG.pdf')
@@ -116,7 +116,6 @@ def mail(address,err):
             pdfPath6 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/info.pdf')
             merger.write(pdfPath6)
 
-
             msg = open('ok.html', 'r', encoding='UTF-8')
             message_text = msg.read()
             msg.close()
@@ -126,12 +125,13 @@ def mail(address,err):
             sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
             sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
 
+
     merger.close()
 
 
-address=["千葉市","稲毛区","稲毛","３","７"]
+# address=["千葉市","稲毛区","稲毛","３","７"]
 
-err = 3
-mail(address, err)
+# err = 0
+# mail(address, err, 'intern.summer.24b@gmail.com')
 # mailに住所を書く
 # 色変更

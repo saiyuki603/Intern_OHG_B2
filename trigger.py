@@ -190,3 +190,4 @@ if __name__ == "__main__":
         re_body_2 = r'<.*@.*>'
         from_mail = re.search(re_body_2, messages_).group()
         from_mail = from_mail[1:-1]
+        print(from_mail)

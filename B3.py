@@ -7,6 +7,8 @@ from selenium.webdriver.common.by import By
 import requests
 from bs4 import BeautifulSoup
 import time
+import C1
+import traceback
 
 import os
 
@@ -26,7 +28,8 @@ def saitama_gesui(address_list):
     xml = requests.get(URL, params=payload)
     soup = BeautifulSoup(xml.content, "xml")
     if soup.find('error'):
-        err = 1
+        err = 4
+        C1.send_error_log("エラーが発生しました:入力内容が不正"+ traceback.format_exc())
     latitude = soup.find('lat').string
     latitude = latitude.replace(',', '')
     longitude = soup.find('lng').string
@@ -37,6 +40,7 @@ def saitama_gesui(address_list):
     
     if found[-1] != '０' and found[-1] != '１' and found[-1] != '２' and found[-1] != '３' and found[-1] != '４' and found[-1] != '５' and found[-1] != '６' and found[-1] != '７' and found[-1] != '８' and found[-1] != '９':
         err = 1
+        C1.send_error_log("エラーが発生しました:メールの住所が存在しません"+ traceback.format_exc())
 
     """
     埼玉の下水を検索・スクショ

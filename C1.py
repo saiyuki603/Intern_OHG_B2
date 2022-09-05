@@ -8,14 +8,20 @@ from email.mime.multipart import MIMEMultipart
 import os
 import PyPDF2
 import sendmail
+import requests
+import json
 
-
+def send_error_log(message):
+        requests.post(
+            "https://hooks.slack.com/services/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",
+            headers={'content-type':'application/json'},
+            data=json.dumps({"text":"no_entry_sign:" + message})
+        )
 
 def mail(address,err):
     sender = "intern.ohg.24b@gmail.com"
     to ="lidanyang633@gmail.com"
-    merger = PyPDF2.PdfFileMerger()
-    # slack = slackweb.Slack(url = "https://hooks.slack.com/services/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")
+    merger = PyPDF2.PdfFileMerger()  
 
     # 両方とも取れない
     if err == 1:
@@ -28,7 +34,7 @@ def mail(address,err):
         sendmail.create_message(sender, to, subject, message_text, cc=None) 
         attach_file_path = None
         sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
-        # slack.notify(text="エラーが発生：入力不正又は範囲外")
+        
         
         
 
@@ -49,7 +55,7 @@ def mail(address,err):
         sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
         sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
 
-        # slack.notify(text="エラーが発生：一部のデータを取得できず")
+        
     elif err == 3:
         # 千葉下水だけとれる
         Chiba_Gesui = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B1.png'))
@@ -66,7 +72,7 @@ def mail(address,err):
         attach_file_path = file_path
         sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
         sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
-        # slack.notify(text="エラーが発生：一部のデータを取得できず")
+        
 
         
 
@@ -131,7 +137,7 @@ def mail(address,err):
 
 address=["千葉市","稲毛区","稲毛","３","７"]
 
-err = 3
+err = 1
 mail(address, err)
 # mailに住所を書く
 # 色変更

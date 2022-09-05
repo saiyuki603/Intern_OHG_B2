@@ -1,3 +1,4 @@
+import imp
 from lib2to3.pgen2 import driver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -10,6 +11,8 @@ import chromedriver_binary
 import pandas as pd
 import re
 import os
+import traceback
+import C1
 import mojimoji
 
 def chiba_doro(address_list, a, err):
@@ -90,12 +93,15 @@ def chiba_doro(address_list, a, err):
     except:
         if err == 0:
             err = 3
+            
     # 両方とも取れない
         elif err == 2:
             err = 1
+            
         else:
             print("千葉県千葉市ではない") 
             err = 1
+        C1.send_error_log("エラーが発生しました:"+ traceback.format_exc())
         return(err)
 
 # B2(['千葉県千葉市','稲毛区','稲毛','３','７','３０'])

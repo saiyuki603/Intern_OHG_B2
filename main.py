@@ -45,6 +45,7 @@ err = 0 : エラーなし
 err = 1 : 住所が不適
 err = 2 : 千葉道路の画像なし
 err = 3 : 千葉下水の画像なし
+err = 4 : 入力内容が不正
 """
 
 address_list = B6.yure(address)

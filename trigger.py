@@ -179,6 +179,22 @@ def main(query="is:unread", tag="daily_report", count=3):
 #     count = 1  # arguments["<count>"]
 #     logging.basicConfig(level=logging.DEBUG)
 
+
+    if messages_ == None:
+        time.sleep(5)
+    else:
+
+        re_body_1 = r'"body": ".*, "subject"'
+        address = re.search(re_body_1, messages_).group()
+        address = address[9:-16]
+        print(address)
+        re_body_2 = r'<.*@.*>'
+        from_mail = re.search(re_body_2, messages_).group()
+        from_mail = from_mail[1:-1]
+        print(from_mail)
+
+        # print(from_mail)
+
 #     messages_ = main(query=query, tag=tag, count=count)
 #     print(messages_)
 
@@ -193,3 +209,4 @@ def main(query="is:unread", tag="daily_report", count=3):
 #         from_mail = re.search(re_body_2, messages_).group()
 #         from_mail = from_mail[1:-1]
 #         print(from_mail)
+

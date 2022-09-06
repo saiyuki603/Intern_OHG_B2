@@ -13,7 +13,6 @@ import os
 URL = 'http://www.geocoding.jp/api/'
 
 def saitama_gesui(address_list):
-    print('B3 start')
 
     err = 0
     """
@@ -28,7 +27,7 @@ def saitama_gesui(address_list):
     xml = requests.get(URL, params=payload)
     soup = BeautifulSoup(xml.content, "xml")
     if soup.find('error'):
-        err = 1
+        err = 4
     latitude = soup.find('lat').string
     latitude = latitude.replace(',', '')
     longitude = soup.find('lng').string
@@ -81,7 +80,5 @@ def saitama_gesui(address_list):
 
     driver.save_screenshot(FILENAME)
     return(err)
-
-    print('B3ended')
 
 # saitama_gesui(['埼玉県さいたま市', '大宮区', '大門町', '２', '１', '１'])

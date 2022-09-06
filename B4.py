@@ -25,7 +25,7 @@ def saitama_doro(address_list):
     xml = requests.get(URL, params=payload)
     soup = BeautifulSoup(xml.content, "xml")
     if soup.find('error'):
-        err = 1
+        err = 4
     latitude = soup.find('lat').string
     latitude = latitude.replace(',', '')
     longitude = soup.find('lng').string

@@ -147,7 +147,6 @@ def mail(address_list, err, to):
 
     merger.close()
 
-
 # address=["千葉市","稲毛区","稲毛","３","７"]
 
 # err = 0

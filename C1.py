@@ -11,6 +11,7 @@ import sendmail
 import requests
 import json
 
+# エラーログ
 def send_error_log(message):
         requests.post(
             "https://hooks.slack.com/services/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",

@@ -72,3 +72,4 @@ def saitama_doro(address_list):
     FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B4.png')
     driver.save_screenshot(FILENAME)
     return(err)
+

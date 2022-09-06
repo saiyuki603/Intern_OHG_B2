@@ -13,7 +13,7 @@ import os
 import mojimoji
 
 
-def chiba(address_list):
+def chiba_gesui(address_list):
   err = 0
   if '千葉市' in address_list[0]:
     
@@ -25,130 +25,65 @@ def chiba(address_list):
       s3 = list[3]
       s4 = list[4]
       driver = webdriver.Chrome()
-      driver.get("http://s-page.tumsy.com/chibagesui/index.html")
-      time.sleep(2)
 
-      # 同意する
+      # 処理時に最大10秒間待つ
+      driver.implicitly_wait(10)
+
+      driver.get("http://s-page.tumsy.com/chibagesui/index.html")
+
       iframe = driver.find_element(By.XPATH,"/html/frameset/frame")
       driver.switch_to.frame(iframe)
-      time.sleep(2)
 
+      # ページの下へスクロール
       driver.execute_script("window.scrollBy(0, document.body.scrollHeight);")
 
       actionChains = ActionChains(driver)
-      
+      # 同意する
       actionChains.click(driver.find_element(By.XPATH,"//*[@id='LinkButton1']")).perform()
-      # driver.switch_to.default_content()
-      time.sleep(5)
       
+      # ドロップダウンから入力内容を検索して、選択する
       d1 = driver.find_element(By.XPATH,"//*[@id='ELM_CMB_LEV1']")
       select = Select(d1)
       select.select_by_visible_text(s1)
-      time.sleep(2)
+
       d2 = driver.find_element(By.XPATH,"//*[@id='ELM_CMB_LEV2']")
       select = Select(d2)
       select.select_by_visible_text(s2)
-      time.sleep(2)
+
 
       d3 = driver.find_element(By.XPATH,"//*[@id='ELM_CMB_LEV3']")
       select = Select(d3)
       selected = select.all_selected_options
 
+      # 丁目なし
       if selected[0].text =="丁目なし":
-        time.sleep(2)
         d4 = driver.find_element(By.XPATH,"//*[@id='ELM_CMB_LEV4']")
         select = Select(d4)
         s4 = s3 + "番地"
         select.select_by_visible_text(s4)
-        time.sleep(2)
         a = 0
+
+      # 丁目あり
       else:
         d3 = driver.find_element(By.XPATH,"//*[@id='ELM_CMB_LEV3']")
         select = Select(d3)
         s3 = s3 + "丁目"
         select.select_by_visible_text(s3)
-        time.sleep(2)
         d4 = driver.find_element(By.XPATH,"//*[@id='ELM_CMB_LEV4']")
         select = Select(d4)
         s4 = s4 + "番"
         select.select_by_visible_text(s4)
-        time.sleep(2)
         a = 1
 
       actionChains.click(driver.find_element(By.XPATH,"//*[@id='btnAddSchDlgOK']")).perform()
-      time.sleep(2)
+      time.sleep(3)
+      # 相対パスにスクショをセーブ
       FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B1.png')
       driver.save_screenshot(FILENAME)
-      # 道路だけとれる
+
+    # 道路だけとれる
     except:
       err = 2
     
-    try:
-      driver.get("https://webgis.alandis.jp/chiba12/portal/index.html")
-      time.sleep(2)
 
-      driver.execute_script("window.scrollBy(0, document.body.scrollHeight);")
-      actionChains.click(driver.find_element(By.XPATH,"//*[@id='agree']")).perform()
-      time.sleep(2)
-      
-      driver.execute_script("window.scrollBy(0, document.body.scrollHeight);")
-      driver.find_element(By.XPATH,"/html/body/main/div[2]/div[2]/div/div/map/area[265]").click()
-      time.sleep(4)
-      actionChains.click(driver.find_element(By.XPATH,"//*[@id='sidemenu_tab_search']")).perform()
-      time.sleep(2)
-      
-      actionChains.click(driver.find_element(By.XPATH,"//*[@id='sidemenu_menu_search_drilldown_1']/span")).perform()
-      time.sleep(2)
-
-      d5 = driver.find_element(By.XPATH,"//*[@id='srh_search_drilldown_1_attrvalue_1']")
-      select = Select(d5)
-      select.select_by_visible_text(s1)
-      time.sleep(5)
-      
-      d6 = driver.find_element(By.XPATH,"//*[@id='srh_search_drilldown_1_attrvalue_2']")
-      select = Select(d6)
-      # 丁目なし
-      if a == 0:
-        select.select_by_visible_text(s2)
-        time.sleep(5)
-        d7 = driver.find_element(By.XPATH,"//*[@id='srh_search_drilldown_1_attrvalue_3']")
-        select = Select(d7)
-        s3 = mojimoji.zen_to_han(s3)
-        select.select_by_visible_text(s3)
-        
-      # 丁目あり
-      else:
-        s2 = s2 + s3 
-        select.select_by_visible_text(s2)
-        time.sleep(5)
-        d7 = driver.find_element(By.XPATH,"//*[@id='srh_search_drilldown_1_attrvalue_3']")
-        select = Select(d7)
-        s4 = s4[:-1]
-        s4 = mojimoji.zen_to_han(s4)
-
-        select.select_by_visible_text(s4)
-
-      time.sleep(2)
-      actionChains.click(driver.find_element(By.XPATH,"//*[@id='srh_search_drilldown_1_btn']")).perform()
-      time.sleep(5)
-      actionChains.click(driver.find_element(By.XPATH,"//*[@id='sidemenu_tab_search']")).perform()
-      time.sleep(2)
-      actionChains.click(driver.find_element(By.XPATH,"//*[@id='index_hidden']")).perform()
-      time.sleep(2)
-      
-      FILENAME1 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B2.png')
-      driver.save_screenshot(FILENAME1)
-
-      driver.quit()
-    # 下水だけとれる
-    except:
-      if err == 0:
-        err = 3
-      # 両方とも取れない
-      elif err == 2:
-        err = 1
-
-  else:
-    print("千葉県千葉市ではない") 
-    err = 1
-  return(err)
+  return(err, a)

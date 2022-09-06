@@ -104,11 +104,15 @@ if __name__ == "__main__":
                 else:
                     err = 1
 
-                C1.mail(address_list, err, from_mail)
-                continue
+            C1.mail(address_list, err, from_mail)
+            continue
 
         except(KeyboardInterrupt):
             sys.exit()
-        except:
-            print('ERROR:予期せぬエラーが発生しました')
+        except Exception as e:
+            print('=== エラー内容 ===')
+            print('type:' + str(type(e)))
+            print('args:' + str(e.args))
+            print('message:' + e.message)
+            print('e自身:' + str(e))
             continue

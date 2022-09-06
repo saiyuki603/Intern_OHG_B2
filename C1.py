@@ -22,15 +22,6 @@ def mail(address,err):
 
 
 def mail(address_list, err, to):
-    address = ''
-    for i in range(3):
-        address = address + address_list[i]
-    for i in range(3, len(address_list)):
-        if i == 3:
-            address = address + address_list[i]
-        else:
-            address = address + '-' + address_list[i]
-
     sender = "intern.summer.24b@gmail.com"
 
     merger = PyPDF2.PdfFileMerger()
@@ -47,8 +38,6 @@ def mail(address_list, err, to):
         attach_file_path = None
         sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
         # slack.notify(text="エラーが発生：入力不正又は範囲外")
-        
-        
 
     elif err == 2:
         # 千葉道路だけとれる
@@ -90,6 +79,16 @@ def mail(address_list, err, to):
 
     # 両方とも取れる
     elif err == 0:
+
+        address = ''
+        for i in range(3):
+            address = address + address_list[i]
+        for i in range(3, len(address_list)):
+            if i == 3:
+                address = address + address_list[i]
+            else:
+                address = address + '-' + address_list[i]
+
         if "千葉市" in address_list[0]:
 
             Chiba_Gesui = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B1.png'))

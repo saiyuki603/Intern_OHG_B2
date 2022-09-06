@@ -14,7 +14,7 @@ import sendmail
 def mail(address,err):
 
     sender = "intern.summer.24b@gmail.com"
-    to ="intern.ohg.24b@gmail.com"
+    to ="shun7109@icloud.com"
 
     # sender = "intern.ohg.24b@gmail.com"
     # to ="lidanyang633@gmail.com"
@@ -24,9 +24,8 @@ def mail(address,err):
 
     # 両方とも取れない
     if err == 1:
-        msg = open('err1.html', 'r', encoding='UTF-8')
-        message_text = msg.read()
-        msg.close()
+        msg = "<h1>エラー発生：入力不正</h1>"+"<p>取得範囲外の住所入力、又は住所入力不正によるエラーが発生し、データが取れませんでした。</p>"+"<br>大変お手数ですが、入力内容の見直しをお願いいたします。"
+        message_text = msg
 
 
         subject = "エラーが発生：入力不正又は範囲外"
@@ -63,10 +62,10 @@ def mail(address,err):
         CG1.save(pdfPath1)
         merger.append(pdfPath1)
 
-        msg = open('err3.html', 'r', encoding='UTF-8')
-        message_text = msg.read()
-        msg.close()
-        subject = "エラーが発生：一部のデータを取得できず"
+        msg = "<h3>● 道路情報</h3>" + "<font size='6px'>※道路情報を取得できませんでした。</font>" + "<br>" + "<font size='4px'><span style='color: red;'>入力内容の見直し</span>をお願いいたします。</font>" + "<br>" + "<h3>● 下水情報</h3>"
+        message_text = msg
+        # msg.close()
+        subject = "一部データ取得エラー"
         file_path = pdfPath1
         attach_file_path = file_path
         sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)

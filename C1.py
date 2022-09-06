@@ -9,9 +9,6 @@ import os
 import PyPDF2
 import sendmail
 
-
-
-
 def mail(address,err):
 
     sender = "intern.summer.24b@gmail.com"

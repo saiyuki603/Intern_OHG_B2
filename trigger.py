@@ -78,7 +78,7 @@ def list_message(service, user_id, query, label_ids=[], count=1):
             .list(userId=user_id, maxResults=count, q=query, labelIds=label_ids)
             .execute()
         )
-
+        print(message_ids)
         if message_ids["resultSizeEstimate"] == 0:
             logger.warning("no result data!")
             return []
@@ -102,10 +102,11 @@ def list_message(service, user_id, query, label_ids=[], count=1):
             else:
                 parts = message_detail['payload']['parts']
                 parts = [part for part in parts if part['mimeType'] == 'text/plain']
+                if parts != []:
+                    message["body"] = decode_base64url_data(
+                        parts[0]['body']['data']
+                        )
 
-                message["body"] = decode_base64url_data(
-                    parts[0]['body']['data']
-                    )
             # payload.headers[name: "Subject"]
             message["subject"] = [
                 header["value"]

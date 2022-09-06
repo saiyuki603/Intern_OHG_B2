@@ -76,7 +76,7 @@ def chiba_gesui(address_list):
         a = 1
 
       actionChains.click(driver.find_element(By.XPATH,"//*[@id='btnAddSchDlgOK']")).perform()
-      time.sleep(3)
+      time.sleep(1)
       # 相対パスにスクショをセーブ
       FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B1.png')
       driver.save_screenshot(FILENAME)

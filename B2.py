@@ -12,13 +12,13 @@ import re
 import os
 import mojimoji
 
-def chiba_doro(address_list, a, err):
+def chiba_doro(address_list, err):
     """
     千葉の道路を取得する関数です。
     """
     try:
 
-        a = 1
+        err = 0
 
         list = address_list
 
@@ -56,7 +56,8 @@ def chiba_doro(address_list, a, err):
         d6 = driver.find_element(By.XPATH,"//*[@id='srh_search_drilldown_1_attrvalue_2']")
         select = Select(d6)
     # 丁目なし
-        if a == 0:
+        try:
+            driver.implicitly_wait(1)
             select.select_by_visible_text(s2)
 
             d7 = driver.find_element(By.XPATH,"//*[@id='srh_search_drilldown_1_attrvalue_3']")
@@ -64,9 +65,10 @@ def chiba_doro(address_list, a, err):
             # 全角から半角へ
             s3 = mojimoji.zen_to_han(s3)
             select.select_by_visible_text(s3)
-        
+
     # 丁目あり
-        else:
+        except:
+            driver.implicitly_wait(1)
             s3 = s3 + '丁目'
             s2 = s2 + s3 
             select.select_by_visible_text(s2)
@@ -82,7 +84,7 @@ def chiba_doro(address_list, a, err):
             # 余計なものを閉じる
             actionChains.click(driver.find_element(By.XPATH,"//*[@id='sidemenu_tab_search']")).perform()
             actionChains.click(driver.find_element(By.XPATH,"//*[@id='index_hidden']")).perform()
-            time.sleep(3)
+            time.sleep(1)
             
         # 相対パスにスクショをセーブする
         FILENAME1 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B2.png')
@@ -94,14 +96,7 @@ def chiba_doro(address_list, a, err):
 
     # 下水だけとれる
     except:
-        if err == 0:
-            err = 3
-    # 両方とも取れない
-        elif err == 2:
-            err = 1
-        else:
-            print("千葉県千葉市ではない") 
-            err = 1
+        err = 3
         return(err)
 
 # B2(['千葉県千葉市','稲毛区','稲毛','３','７','３０'])

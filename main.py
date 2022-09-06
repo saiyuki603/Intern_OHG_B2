@@ -67,15 +67,12 @@ if __name__ == "__main__":
                 if address_list == 1:
                     err = 1
                 elif "千葉市" in address_list[0]:
-                    err, a = B1.chiba_gesui(address_list)
-                    err = B2.chiba_doro(address_list, a, err)
-                elif "さいたま市" in address_list[0]:
                     if __name__ == '__main__':
                         process_list = []
 
-                        process1 = Process(target=B3.saitama_gesui,args=(address_list,))
-                        process2 = Process(target=B4.saitama_doro,args=(address_list,))
-                        
+                        process1 = Process(target=B1.chiba_gesui,args=(address_list,))
+                        process2 = Process(target=B2.chiba_doro,args=(address_list, err,))
+
                         process1.start()
                         process2.start()
                         process_list.append(process1)
@@ -83,6 +80,27 @@ if __name__ == "__main__":
 
                         for process in process_list:
                             process.join()
+                elif "さいたま市" in address_list[0]:
+                    if __name__ == '__main__':
+                        process_list = []
+                        chiba_err = []
+
+                        process1 = Process(target=B3.saitama_gesui,args=(address_list,))
+                        chiba_err.append(process1)
+
+                        process2 = Process(target=B4.saitama_doro,args=(address_list,))
+                        chiba_err.append(process2)
+
+                        process1.start()
+                        process2.start()
+                        process_list.append(process1)
+                        process_list.append(process2)
+                        print(process_list)
+
+                        for process in process_list:
+                            process.join()
+
+                        print(chiba_err)
                 else:
                     err = 1
 

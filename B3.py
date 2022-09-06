@@ -74,7 +74,7 @@ def saitama_gesui(address_list):
 
     driver.find_element(By.XPATH, '//*[@id="side_menu_toggle_btn"]/div[1]').click()
 
-    time.sleep(3)
+    time.sleep(1)
 
     FILENAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), "image\B3.png")
 

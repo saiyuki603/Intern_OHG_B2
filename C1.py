@@ -121,6 +121,6 @@ def mail(address_list, err, to):
     merger.close()
 
 
-# mail(address, err, 'lidanyang633@gmail.com')
+mail(address, err, 'lidanyang633@gmail.com')
 # mailに住所を書く
 # 色変更

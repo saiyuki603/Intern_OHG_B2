@@ -10,6 +10,8 @@ import chromedriver_binary
 import pandas as pd
 import re
 import os
+import C1
+import traceback
 import mojimoji
 
 
@@ -84,6 +86,7 @@ def chiba_gesui(address_list):
     # 道路だけとれる
     except:
       err = 2
+      C1.send_error_log("エラーが発生しました:"+ traceback.format_exc())
     
 
   return(err, a)

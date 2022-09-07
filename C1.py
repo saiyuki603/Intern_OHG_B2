@@ -9,6 +9,7 @@ import os
 import PyPDF2
 import sendmail
 
+
 def address_merge(address_list):
     address = ''
     for i in range(3):
@@ -20,16 +21,27 @@ def address_merge(address_list):
             address = address + '-' + address_list[i]
     return(address)
 
+merger = PyPDF2.PdfFileMerger()
+
+
+def pdfChanger(imagePath, pdfPath):
+    image = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), imagePath))
+    image1 = image.convert("RGB")
+    PdfPath = os.path.join(os.path.abspath(os.path.dirname(__file__)), pdfPath)
+    image1.save(PdfPath)
+    merger.append(PdfPath)
+
 
 def mail(address_list, err, to):
     sender = "intern.summer.24b@gmail.com"
 
-    merger = PyPDF2.PdfFileMerger()
+
     # slack = slackweb.Slack(url = "https://hooks.slack.com/services/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")
 
     # 両方とも取れない
     if err == 1:
         msg = "<font size='6px'>取得範囲外又は誤った住所入力、あるいはシステム上のエラーの疑いがあります。</font>"+"<br>住所をもう一度ご確認の上、再度お試しください。範囲内の住所は、<span style='color: red;'>千葉市とさいたま市</span>です。"
+
         message_text = msg
 
 
@@ -42,17 +54,14 @@ def mail(address_list, err, to):
     elif err == 2:
 
         # 千葉道路だけとれる
-        Chiba_Doro = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B2.png'))
-        CG2 = Chiba_Doro.convert("RGB")
-        pdfPath2 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/CD.pdf')
-        CG2.save(pdfPath2)
-        merger.append(pdfPath2)
+        pdfChanger('image/B2.png', 'pdf/CD.pdf')
 
         msg = "<h3>● 道路情報</h3>" + "<font size='6px'>※道路情報を取得できませんでした。</font>" + "<br>" + "<font size='4px'><span style='color: red;'>入力内容の見直し</span>をお願いいたします。</font>" + "<br>" + "<h3>● 下水情報</h3>" # open('err2.html', 'r', encoding='UTF-8')
         message_text = msg # msg.read()
         # msg.close()
         subject = "エラー：一部データ取得失敗"
-        file_path = pdfPath2
+
+        file_path = pdfChanger.PdfPath
         attach_file_path = file_path
         sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
         sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
@@ -60,17 +69,14 @@ def mail(address_list, err, to):
         # slack.notify(text="エラーが発生：一部のデータを取得できず")
     elif err == 3:
         # 千葉下水だけとれる
-        Chiba_Gesui = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B1.png'))
-        CG1 = Chiba_Gesui.convert("RGB")
-        pdfPath1 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/CG.pdf')
-        CG1.save(pdfPath1)
-        merger.append(pdfPath1)
+        pdfChanger('image/B1.png', 'pdf/CG.pdf')
 
         msg = "<h3>● 下水情報</h3>" + "<font size='6px'>※下水情報を取得できませんでした。</font>" + "<br>" + "<font size='4px'><span style='color: red;'>入力内容の見直し</span>をお願いいたします。</font>" + "<br>" + "<h3>● 道路情報</h3>"
         message_text = msg
         # msg.close()
         subject = "エラー：一部データ取得失敗"
-        file_path = pdfPath1
+
+        file_path = pdfChanger.PdfPath
         attach_file_path = file_path
         sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
         sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
@@ -80,7 +86,6 @@ def mail(address_list, err, to):
 
     # 両方とも取れる
     elif err == 0:
-        
         address = address_merge(address_list)
         print(address)
 
@@ -91,49 +96,38 @@ def mail(address_list, err, to):
             pdfPath1 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/CG.pdf')
             CG1.save(pdfPath1)
 
-            Chiba_Doro = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B2.png'))
-            CG2 = Chiba_Doro.convert("RGB")
-            pdfPath2 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/CD.pdf')
-            CG2.save(pdfPath2)
+        if "千葉市" in address_list[0]:
 
-            merger.append(pdfPath1)
-            merger.append(pdfPath2)
+            pdfChanger('image/B1.png', 'pdf/CG.pdf')
+            pdfChanger('image/B2.png', 'pdf/CD.pdf')
 
-            pdfPath5 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/info.pdf')
+            pdfPath1 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/info.pdf')
 
-            merger.write(pdfPath5)
+
+            merger.write(pdfPath1)
 
             msg = str(address) + "<br>" + "<h3>● 道路・下水情報</h3>" + "<font size='6px'>" # open('ok.html', 'r', encoding='UTF-8')
             message_text = msg # msg.read()
             # msg.close()
             subject = "データ取得成功"
-            file_path = pdfPath5
+            file_path = pdfPath1
             attach_file_path =file_path
             sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
             sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
 
         elif "さいたま市" in address_list[0]:
-            Saitama_Gesui = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B3.png'))
-            CG3 = Saitama_Gesui.convert("RGB")
-            pdfPath3 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/SG.pdf')
-            CG3.save(pdfPath3)
 
-            Saitama_Doro = Image.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'image/B4.png'))
-            CG4 = Saitama_Doro.convert("RGB")
-            pdfPath4 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/SD.pdf')
-            CG4.save(pdfPath4)
-
-            merger.append(pdfPath3)
-            merger.append(pdfPath4)
-
-            pdfPath6 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/info.pdf')
-            merger.write(pdfPath6)
+            pdfChanger('image/B3.png', 'pdf/SG.pdf')
+            pdfChanger('image/B4.png', 'pdf/SD.pdf')
+            
+            pdfPath2 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pdf/info.pdf')
+            merger.write(pdfPath2)
 
             msg = str(address) + "<br>" + "<h3>● 道路・下水情報</h3>" + "<font size='6px'>" # open('ok.html', 'r', encoding='UTF-8')
             message_text = msg # msg.read()
             # msg.close()
             subject = "データ取得成功"
-            file_path = pdfPath6
+            file_path = pdfPath2
             attach_file_path= file_path
             sendmail.create_message_with_attachment(sender, to, subject, message_text, file_path, cc=None)
             sendmail.main(sender, to, subject, message_text, attach_file_path, cc=None)
@@ -142,6 +136,7 @@ def mail(address_list, err, to):
     merger.close()
 
 # address=["千葉市","稲毛区","稲毛","３","７"]
+
 
 # err = 0
 # mail(address, err, 'tetsujskl@gmail.com')

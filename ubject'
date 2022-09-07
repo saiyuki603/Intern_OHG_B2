@@ -1,0 +1,101 @@
+[33mcommit 90cbfe8d6b8f6f50cd54e826c4bdf014228276f7[m[33m ([m[1;36mHEAD -> [m[1;32mdev_ri[m[33m, [m[1;32mdev_kobayashi[m[33m)[m
+Author: Higa Shun <higashun9@gmail.com>
+Date:   Thu Sep 1 16:07:47 2022 +0900
+
+    trigger.py
+
+[33mcommit 18f67b2f9695b1db47ff43ab17f78727e35ad7d1[m
+Merge: 7493523 34ec70e
+Author: Higa Shun <higashun9@gmail.com>
+Date:   Thu Sep 1 15:26:01 2022 +0900
+
+    Merge branch 'dev_ri' of github.com:saiyuki603/Intern_OHG_B2 into dev_ri
+
+[33mcommit 34ec70eb6a14fb309617c6ecffb494271f4df24a[m
+Author: saiyuki603 <4120254s@g.hit-u.ac.jp>
+Date:   Thu Sep 1 14:41:29 2022 +0900
+
+     PDF結合
+
+[33mcommit cb07e98d65bfa9ca5915389c232d9e24f5311b7c[m
+Author: saiyuki603 <4120254s@g.hit-u.ac.jp>
+Date:   Thu Sep 1 14:40:42 2022 +0900
+
+     住所変更
+
+[33mcommit ca595d62430a8312bc7ca859a770b4f68ffb6975[m
+Merge: 4a0e755 290bba8
+Author: saiyuki603 <4120254s@g.hit-u.ac.jp>
+Date:   Thu Sep 1 12:09:01 2022 +0900
+
+    Merge branch 'dev_kobayashi' of github.com:saiyuki603/Intern_OHG_B2 into dev_ri
+
+[33mcommit 4a0e755688d0b5b7045280717b8d9669ef82809c[m
+Merge: 9414641 8f02616
+Author: saiyuki603 <4120254s@g.hit-u.ac.jp>
+Date:   Thu Sep 1 12:08:03 2022 +0900
+
+    Merge branch 'dev_higa' of github.com:saiyuki603/Intern_OHG_B2 into dev_ri
+
+[33mcommit 941464166d3f71946f81d23d1d4bae3b1b6e31f3[m
+Author: saiyuki603 <4120254s@g.hit-u.ac.jp>
+Date:   Thu Sep 1 12:05:51 2022 +0900
+
+    C-1
+
+[33mcommit 749352345fffd0361cb26ed63acf9c141cd7814c[m[33m ([m[1;32mdevelop[m[33m)[m
+Merge: 29c1c05 290bba8
+Author: Tetsuro Kobayashi <112329589+tetsujskl@users.noreply.github.com>
+Date:   Thu Sep 1 12:00:26 2022 +0900
+
+    Merge pull request #3 from saiyuki603/dev_kobayashi
+    
+    B-4, B-6
+
+[33mcommit 290bba8627265249192f9cef00784bcf8120e3c8[m
+Author: Tetsuro Kobayashi <tetsujskl@gmail.com>
+Date:   Thu Sep 1 11:58:06 2022 +0900
+
+    B-4
+
+[33mcommit 8f02616662481036ede9b383746f490df2afed13[m
+Author: Higa Shun <higashun9@gmail.com>
+Date:   Thu Sep 1 11:55:42 2022 +0900
+
+    A1, 2, 3
+
+[33mcommit 29c1c058ce44672a04d273005e4965ee0ff9a1a7[m
+Merge: f8ede05 fea39f5
+Author: Tetsuro Kobayashi <112329589+tetsujskl@users.noreply.github.com>
+Date:   Thu Sep 1 11:54:39 2022 +0900
+
+    Merge pull request #2 from saiyuki603/dev_ri
+    
+    B-1
+
+[33mcommit fea39f54d48a8319762f8161666f76cdc6cc2286[m
+Author: saiyuki603 <4120254s@g.hit-u.ac.jp>
+Date:   Thu Sep 1 11:53:39 2022 +0900
+
+    B-1
+
+[33mcommit f8ede05d5f43dbff8d0865fef1937a8c52e567dc[m
+Merge: 8a85d13 affa4a3
+Author: Tetsuro Kobayashi <112329589+tetsujskl@users.noreply.github.com>
+Date:   Thu Sep 1 11:46:57 2022 +0900
+
+    Merge pull request #1 from saiyuki603/dev_kobayashi
+    
+    B-3
+
+[33mcommit affa4a3f24aabc9eb356fa81a5a0fc78032a7a25[m
+Author: Tetsuro Kobayashi <tetsujskl@gmail.com>
+Date:   Thu Sep 1 11:43:25 2022 +0900
+
+    B-3
+
+[33mcommit 8a85d13ee24a697e4c7ae79d1bffc1f12f765953[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Tetsuro Kobayashi <tetsujskl@gmail.com>
+Date:   Thu Sep 1 11:38:22 2022 +0900
+
+    first commit]

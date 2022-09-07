@@ -12,7 +12,7 @@ import sendmail
 def mail(address,err):
 
     sender = "intern.summer.24b@gmail.com"
-    to ="shun7109@icloud.com"
+    to ="xxxxx@xxx.xxx"
 
     # sender = "intern.ohg.24b@gmail.com"
     # to ="lidanyang633@gmail.com"
@@ -26,7 +26,7 @@ def mail(address_list, err, to):
 
     # 両方とも取れない
     if err == 1:
-        msg = "<font size='6px'>取得範囲外又は誤った住所入力、あるいはシステム上のエラーの疑いがあります。</font>"+"<br>住所をもう一度ご確認の上、再度お試しください。それでも取得できない場合はお問い合わせください。"
+        msg = str(address) + "<font size='6px'>取得範囲外又は誤った住所入力、あるいはシステム上のエラーの疑いがあります。</font>"+"<br>住所をもう一度ご確認の上、再度お試しください。それでも取得できない場合はお問い合わせください。"
         message_text = msg
 
 
@@ -44,7 +44,7 @@ def mail(address_list, err, to):
         CG2.save(pdfPath2)
         merger.append(pdfPath2)
 
-        msg = "<h3>● 道路情報</h3>" + "<font size='6px'>※道路情報を取得できませんでした。</font>" + "<br>" + "<font size='4px'><span style='color: red;'>入力内容の見直し</span>をお願いいたします。</font>" + "<br>" + "<h3>● 下水情報</h3>" # open('err2.html', 'r', encoding='UTF-8')
+        msg = str(address) + "<h3>● 道路情報</h3>" + "<font size='6px'>※道路情報を取得できませんでした。</font>" + "<br>" + "<font size='4px'><span style='color: red;'>入力内容の見直し</span>をお願いいたします。</font>" + "<br>" + "<h3>● 下水情報</h3>" # open('err2.html', 'r', encoding='UTF-8')
         message_text = msg # msg.read()
         # msg.close()
         subject = "エラー：一部データ取得失敗"
@@ -62,7 +62,7 @@ def mail(address_list, err, to):
         CG1.save(pdfPath1)
         merger.append(pdfPath1)
 
-        msg = "<h3>● 下水情報</h3>" + "<font size='6px'>※下水情報を取得できませんでした。</font>" + "<br>" + "<font size='4px'><span style='color: red;'>入力内容の見直し</span>をお願いいたします。</font>" + "<br>" + "<h3>● 道路情報</h3>"
+        msg = str(address) + "<h3>● 下水情報</h3>" + "<font size='6px'>※下水情報を取得できませんでした。</font>" + "<br>" + "<font size='4px'><span style='color: red;'>入力内容の見直し</span>をお願いいたします。</font>" + "<br>" + "<h3>● 道路情報</h3>"
         message_text = msg
         # msg.close()
         subject = "エラー：一部データ取得失敗"

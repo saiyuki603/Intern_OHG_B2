@@ -15,7 +15,7 @@ import sendmail
 def mail(address,err):
 
     sender = "intern.summer.24b@gmail.com"
-    to ="shun7109@icloud.com"
+    to ="xxxxx@xxx.xxx"
 
     # sender = "intern.ohg.24b@gmail.com"
     # to ="lidanyang633@gmail.com"

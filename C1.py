@@ -9,14 +9,6 @@ import os
 import PyPDF2
 import sendmail
 
-def mail(address,err):
-
-    sender = "intern.summer.24b@gmail.com"
-    to ="shun7109@icloud.com"
-
-    # sender = "intern.ohg.24b@gmail.com"
-    # to ="lidanyang633@gmail.com"
-
 
 def mail(address_list, err, to):
     sender = "intern.summer.24b@gmail.com"
@@ -145,7 +137,7 @@ def mail(address_list, err, to):
 
 # address=["千葉市","稲毛区","稲毛","３","７"]
 
-# err = 0
-# mail(address, err, 'shun7109@icloud.com')
+# err = 3
+# mail(address, err, to)
 # mailに住所を書く
 # 色変更
